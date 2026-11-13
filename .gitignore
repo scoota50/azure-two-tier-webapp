@@ -1,0 +1,33 @@
+# Local configuration and credentials
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.pfx
+*credentials*
+
+# Python
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.venv/
+venv/
+
+# IDE / OS
+.DS_Store
+.vscode/
+.idea/
+
+# Local build & test output
+.coverage
+htmlcov/
+dist/
+build/
+*.log
+
+# Terraform state, if IaC is introduced later
+.terraform/
+*.tfstate
+*.tfstate.*
+crash.log
