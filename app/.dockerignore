@@ -1,0 +1,23 @@
+# Git metadata
+.git
+.gitignore
+
+# Python cache and compiled files
+__pycache__/
+*.pyc
+*.pyo
+
+# Virtual environments
+.venv/
+venv/
+
+# Environment variables and secrets
+.env
+.env.*
+*.pem
+*.key
+
+# Local development files
+.vscode/
+.idea/
+.pytest_cache/

@@ -86,3 +86,51 @@ Not completed:
 6. Document what works, what breaks, and what I learned.
 
 I'll update this README as I make progress. I want it to reflect what I've actually done and understand, not just what I plan to accomplish.
+
+## Architecture Decision — Database
+
+# 13Nov26 @ 14:50
+I've decided to use Azure Database for MySQL Flexible Server instead of managing MySQL containers myself.
+
+My main focus is DevOps engineering, specifically automation, Azure infrastructure, CI/CD, and reliability. Deep database administration isn't what I'm trying to develop with this project.
+
+I still need to understand database connectivity, security, backups, monitoring, and recovery. I'm choosing to let Azure manage more of the underlying database infrastructure so I can focus on those areas.
+
+I plan to explore zone-redundant high availability, but I haven't deployed or tested the database yet.
+
+**Status:** Planned — not implemented.
+
+# 14Nov26 @ 17:49
+## Local Docker Deployment — Milestone 1
+
+1. What I Built
+
+Created a basic Flask application and containerized it using Docker. I used Gunicorn to serve the application and exposed it through port 5000.
+
+2. Engineering Decisions
+
+Non-root user: No reason for the application to run with root privileges. I wanted to limit unnecessary permissions.
+
+.dockerignore: Prevents unnecessary files and sensitive information from being included in the Docker build context.
+
+Gunicorn: Used instead of Flask's development server because I want to build toward a production environment.
+
+3. Validation
+
+Built the Docker image, started a container, and confirmed the application was accessible through localhost:5000. I also verified that Docker reported the container as healthy.
+
+4. Failure Testing
+
+I intentionally changed the health check to target an endpoint that didn't exist.
+
+The container was still running, but after three failed checks, Docker marked it as unhealthy.
+
+I corrected the endpoint, rebuilt the image, and verified the container returned to a healthy state.
+
+5. What I Learned
+
+Just because a container is running doesn't mean the application is working.
+
+Each test validates something specific. A running process, an HTTP response, and database connectivity are different things. I don't want to assume one works just because another does.
+
+This milestone covered local container deployment and basic health checks. Database integration, CI/CD, and high availability are still to come.
