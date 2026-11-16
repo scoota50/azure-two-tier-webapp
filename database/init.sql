@@ -1,0 +1,12 @@
+CREATE TABLE IF NOT EXISTS messages (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    message TEXT NOT NULL
+);
+
+REVOKE ALL PRIVILEGES, GRANT OPTION
+FROM 'flask_user'@'%';
+
+GRANT SELECT, INSERT
+ON mydatabase.messages
+TO 'flask_user'@'%';
